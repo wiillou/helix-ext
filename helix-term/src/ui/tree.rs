@@ -1067,14 +1067,14 @@ impl<T: TreeViewItem + Clone> TreeView<T> {
                 key!(i @ '0'..='9') => {
                     self.count = i.to_digit(10).unwrap_or(0) as usize + count * 10
                 }
-                shift!('J') => self.move_to_next_sibling()?,
-                shift!('K') => self.move_to_previous_sibling()?,
-                shift!('H') => self.move_to_first_sibling()?,
-                shift!('L') => self.move_to_last_sibling()?,
-                key!('j') | key!(Down) | ctrl!('n') => self.move_down(1.max(count)),
-                key!('k') | key!(Up) | ctrl!('p') => self.move_up(1.max(count)),
-                key!('h') | key!(Left) => self.move_to_parent()?,
-                key!('l') | key!(Right) => self.move_to_children()?,
+                shift!('I') => self.move_to_next_sibling()?,
+                shift!('E') => self.move_to_previous_sibling()?,
+                shift!('N') => self.move_to_first_sibling()?,
+                shift!('O') => self.move_to_last_sibling()?,
+                key!('i') | key!(Down) | ctrl!('n') => self.move_down(1.max(count)),
+                key!('e') | key!(Up) | ctrl!('p') => self.move_up(1.max(count)),
+                key!('n') | key!(Left) => self.move_to_parent()?,
+                key!('o') | key!(Right) => self.move_to_children()?,
                 key!(Enter) | key!('o') => self.on_enter(cx, params, self.selected)?,
                 ctrl!('d') => self.move_down_half_page(),
                 ctrl!('u') => self.move_up_half_page(),
@@ -1094,16 +1094,16 @@ impl<T: TreeViewItem + Clone> TreeView<T> {
                         match event {
                             key!('g') => tree.move_to_first_line(),
                             key!('e') => tree.move_to_last_line(),
-                            key!('h') => tree.move_leftmost(),
-                            key!('l') => tree.move_rightmost(),
+                            key!('n') => tree.move_leftmost(),
+                            key!('o') => tree.move_rightmost(),
                             _ => {}
                         };
                         Ok(())
                     }));
                 }
                 key!('/') => self.new_search_prompt(Direction::Forward),
-                key!('n') => self.move_to_next_search_match(),
-                shift!('N') => self.move_to_previous_next_match(),
+                key!('j') => self.move_to_next_search_match(),
+                shift!('J') => self.move_to_previous_next_match(),
                 key!(PageDown) => self.move_down_page(),
                 key!(PageUp) => self.move_up_page(),
                 shift!('R') => {
@@ -1113,7 +1113,7 @@ impl<T: TreeViewItem + Clone> TreeView<T> {
                 }
                 key!(Home) => self.move_leftmost(),
                 key!(End) => self.move_rightmost(),
-                ctrl!('o') => self.jump_backward(),
+                ctrl!('e') => self.jump_backward(),
                 ctrl!('i') | key!(Tab) => self.jump_forward(),
                 _ => return Ok(EventResult::Ignored(None)),
             };
